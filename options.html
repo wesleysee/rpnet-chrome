@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>RPNet Link Generator - Options</title>
+<style>
+body {
+  font-family:helvetica, arial, sans-serif;
+  font-size:80%;
+  margin:10px;
+}
+
+#header {
+  padding-bottom:1.5em;
+  padding-top:1.5em;
+}
+
+#header h1 {
+  font-size: 156%;
+  display:inline;
+  padding-bottom:43px;
+  padding-left:75px;
+  padding-top:40px;
+  background:url(icon_128.png) no-repeat;
+  background-size:67px;
+  background-position:1px 18px;
+}
+
+.section-header {
+  background:#ebeff9;
+  border-top:1px solid #b5c7de;
+  font-size:99%;
+  padding:3px 0 2px 5px;
+  font-weight:bold;
+  margin-bottom:1em;
+  margin-top:4em;
+}
+
+.section-header.first {
+  margin-top:1em;
+}
+
+.inputLabel {
+  width:50px;
+  margin-left:10px;
+}
+
+#footer {
+  clear:both;
+  padding-top:1em;
+}
+
+.formstyle {  
+  line-height:25px;
+  height: 25px;
+}
+
+.formstyle label {
+  display:block; 
+  margin-left:20px; 
+  float:left;
+  width: 100px;
+  clear:left;
+}
+
+.formstyle input {
+  float:left;
+}
+</style>
+<script src="options.js"></script>
+</head>
+<body>
+
+<div id="header"><h1>RPNet Link Generator Options</h1></div>
+
+<div class="section-header first">Login Credentials</div>
+<p>Please enter your login information for RPNet below</p>
+<div class="formstyle">
+  <label for="username">Username</label><input type="text" id="username">
+  <label for="password">Password</label><input type="password" id="password">
+</div>
+<div id="footer">
+  <button id="save-button" style="font-weight:bold">Save</button>
+  <button id="cancel-button">Cancel</button>
+</div>
+
+</body>
+</html>

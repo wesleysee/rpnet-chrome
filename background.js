@@ -7,13 +7,10 @@ function getLinks(info, tab) {
   for (var i = 0; i < len; i++) {
   	var link = linksArr[i];
   	if (isValidLink(link)) {
-	  	links += link;
-	  	if (i != len - 1) {
-	  		links += "\n";
-	  	}
+	  	getRPNetLinks(link);
+      //chrome.browserAction.getPopup({}, function(result) {console.log(result)});
   	}
   }
-  getRPNetLinks(links);
 }
 
 function isValidLink(link) {
@@ -28,20 +25,19 @@ function getRPNetLinks(links) {
     xmlhttp.open("POST", "https://premium.rpnet.biz/client_api.php?action=generate");
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 
-    xmlhttp.onreadystatechange = function()
-	{
-        if (xmlhttp.readyState == 4)
-		{
-            if (xmlhttp.status == 200 || xmlhttp.status == 304)
-			{
-				var response = xmlhttp.responseText;
-				console.log(response);
-            }
-            else
-			{
-                throw Error("rpnet download: xmlhttp failure (Status = "+xmlhttp.status+")");
-            }
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4) {
+        if (xmlhttp.status == 200 || xmlhttp.status == 304) {
+				  var response = JSON.parse(xmlhttp.responseText);
+          if (response.links[0].hasOwnProperty('generated')) {
+				    console.log(response.links[0].generated);
+          } else {
+            throw Error(response.links[0].error);
+          }
+        } else {
+          throw Error("rpnet download: xmlhttp failure (Status = "+xmlhttp.status+")");
         }
+      }
     }
 
     var dataString = "username=" + localStorage.getItem("rpnet_username")

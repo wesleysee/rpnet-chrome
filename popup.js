@@ -12,16 +12,15 @@ function populate(links) {
 		return;
 	}
 	var len = links.length;
-	var html = "<div class=\"tabbable\"><ul class=\"nav nav-tabs\"><li class=\"active\"><a href=\"#tab1\" data-toggle=\"tab\">Section 1</a></li>"
-  html += "<li><a href=\"#tab2\" data-toggle=\"tab\">Section 2</a></li></ul><div class=\"tab-content\">";
 	var currentIndex = chrome.extension.getBackgroundPage().getCurrentIndex();
-	for (var i = 0; i < len; i++) {
-		var linkArr = links[i];
+	var html = constructTabHeaders(len, currentIndex);
+	for (var i = 1; i < len + 1; i++) {
+		var linkArr = links[i - 1];
 		var len_j = linkArr.length;
-		if (i == currentIndex - 1) {
-			html += "<div class=\"tab-pane active\" id=\"tab" + (i + 1) + "\">";
+		if (i == currentIndex) {
+			html += "<div class=\"tab-pane active\" id=\"tab" + i + "\">";
 		} else {
-			html += "<div class=\"tab-pane\" id=\"tab" + (i + 1) + "\">";
+			html += "<div class=\"tab-pane\" id=\"tab" + i + "\">";
 		}
 		for (var j = 0; j < len_j; j++) {
 			var link = linkArr[j];
@@ -31,4 +30,17 @@ function populate(links) {
 	}
 	html += "</div>";
 	document.write(html);
+}
+
+function constructTabHeaders(numOfTabs, currentIndex) {
+	var html = "<div class=\"tabbable\"><ul class=\"nav nav-tabs\">";
+	for (var i = 1; i < numOfTabs + 1; i++) {
+		if (i == currentIndex) {
+			html += "<li class=\"active\"><a href=\"#tab" + i + "\" data-toggle=\"tab\">Link #" + i + "</a></li>"
+		} else {
+			html += "<li><a href=\"#tab" + i + "\" data-toggle=\"tab\">Link #" + i + "</a></li>"
+		}
+	}
+	html += "</ul><div class=\"tab-content\">";
+	return html;
 }

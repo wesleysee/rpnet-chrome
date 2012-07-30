@@ -65,3 +65,7 @@ function getRPNetLinks() {
 function getCurrentIndex() {
   return currentIndex;
 }
+
+function deleteIndex(index) {
+  rpnetLinks[index] = null;
+}
